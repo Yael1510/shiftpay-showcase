@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Staff clock in on a PIN tablet or their phone, managers see who's on duty live, and semi-monthly payroll is computed with overtime, night differential, holiday pay, SSS, PhilHealth, Pag-IBIG and BIR. Watch the 2-minute tour and try it free for 7 days.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ShiftPay: time clock, live board and Philippine payroll">
+<meta property="og:description" content="Staff clock in on a PIN tablet or their phone, managers see who's on duty live, and semi-monthly payroll is computed with overtime, night differential, holiday pay, SSS, PhilHealth, Pag-IBIG and BIR. Watch the 2-minute tour and try it free for 7 days.">
+<meta property="og:url" content="https://yael1510.github.io/shiftpay-showcase/">
+<meta property="og:image" content="https://yael1510.github.io/shiftpay-showcase/media/og.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta property="og:video" content="https://yael1510.github.io/shiftpay-showcase/shiftpay-walkthrough.mp4">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ShiftPay: time clock, live board and Philippine payroll">
+<meta name="twitter:description" content="Staff clock in on a PIN tablet or their phone, managers see who's on duty live, and semi-monthly payroll is computed with overtime, night differential, holiday pay, SSS, PhilHealth, Pag-IBIG and BIR. Watch the 2-minute tour and try it free for 7 days.">
+<meta name="twitter:image" content="https://yael1510.github.io/shiftpay-showcase/media/og.png">
+<meta name="theme-color" content="#0b0f15">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232dd4bf'/%3E%3Cstop offset='1' stop-color='%230ea5e9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='url(%23g)'/%3E%3Ccircle cx='30' cy='30' r='15' fill='none' stroke='%2304201c' stroke-width='4'/%3E%3Cpath d='M30 20v10l6 4' fill='none' stroke='%2304201c' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<title>ShiftPay Walkthrough</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+  /* Layout: one centred column — video first, chapters beside it on wide screens, then what ShiftPay does and how to try it. */
+  :root {
+    --bg: #0b0f15; --surface: #131922; --line: #232b36; --fg: #e6edf3; --muted: #93a0ad;
+    --accent: #2dd4bf; --accent-ink: #04201c; --accent-soft: rgba(45, 212, 191, .12);
+    --display: "Inter", "Segoe UI", system-ui, sans-serif; --body: "Inter", "Segoe UI", system-ui, sans-serif;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f5f8f9; --surface: #ffffff; --line: #dbe3e8; --fg: #0f1a22; --muted: #566572;
+      --accent: #0d9488; --accent-ink: #ffffff; --accent-soft: rgba(13, 148, 136, .1); color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f5f8f9; --surface: #ffffff; --line: #dbe3e8; --fg: #0f1a22; --muted: #566572;
+    --accent: #0d9488; --accent-ink: #ffffff; --accent-soft: rgba(13, 148, 136, .1); color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 1160px; margin: 0 auto; padding-block: 40px 72px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: grid; gap: 56px;
+  }
+  .brand { font-weight: 800; letter-spacing: -.02em; font-size: 20px; }
+  .brand span, .hl { color: var(--accent); }
+  header { display: grid; gap: 14px; max-width: 760px; }
+  h1 { font-family: var(--display); font-size: clamp(34px, 6vw, 56px); line-height: 1.04; letter-spacing: -.035em; margin: 6px 0 0; text-wrap: balance; }
+  .lede { color: var(--muted); font-size: 19px; max-width: 62ch; margin: 0; }
+  .player { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 20px; align-items: start; }
+  video { width: 100%; max-width: 100%; aspect-ratio: 16 / 9; display: block; border-radius: 16px; background: #000;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .35), 0 0 0 1px var(--line); }
+  .chapters { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 10px; display: grid; gap: 2px; }
+  .chapters h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 6px 10px 6px; }
+  .chapters button {
+    all: unset; cursor: pointer; display: grid; grid-template-columns: 44px 1fr; gap: 8px; align-items: baseline;
+    padding: 9px 10px; border-radius: 10px; font-size: 15px;
+  }
+  .chapters button:hover, .chapters button[aria-current="true"] { background: var(--accent-soft); }
+  .chapters button[aria-current="true"] .t { color: var(--accent); }
+  .chapters button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .t { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; }
+  .section-title { font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); font-weight: 700; margin: 0 0 16px; }
+  .features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .feature { border-top: 2px solid var(--line); padding-top: 16px; }
+  .feature h3 { margin: 0 0 6px; font-size: 18px; letter-spacing: -.01em; }
+  .feature p { margin: 0; color: var(--muted); font-size: 15px; }
+  .rules { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .rules span { border: 1px solid var(--line); background: var(--surface); border-radius: 99px; padding: 6px 12px; font-size: 14px; }
+  .cta { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+  .cta h2 { margin: 0; font-size: 26px; letter-spacing: -.02em; }
+  .cta p { margin: 4px 0 0; color: var(--muted); }
+  .cta a { background: var(--accent); color: var(--accent-ink); font-weight: 700; text-decoration: none; padding: 13px 20px; border-radius: 12px; }
+  .cta a:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+  footer { color: var(--muted); font-size: 13px; }
+  @media (max-width: 860px) {
+    .player { grid-template-columns: minmax(0, 1fr); }
+    .features { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+</head>
+<body style="margin:0">
+
+
+<div class="wrap">
+  <header>
+    <div class="brand">Shift<span>Pay</span></div>
+    <h1>From the time clock to the <span class="hl">payslip.</span></h1>
+    <p class="lede">A two-minute tour of ShiftPay, told through a day at a café: shift monitoring and semi-monthly payroll for Philippine businesses with 11 to 50 people. Narrated, with captions. Filmed on a demo café with sample data.</p>
+  </header>
+
+  <section class="player" aria-label="Walkthrough video">
+    <video id="video" controls playsinline preload="metadata" poster="shiftpay-thumbnail.png">
+      <source src="shiftpay-walkthrough.mp4" type="video/mp4">
+    </video>
+    <nav class="chapters" aria-label="Chapters">
+      <h2>Chapters</h2>
+      <button data-t="0"><span class="t">0:00</span>Intro</button>
+      <button data-t="17.3"><span class="t">0:17</span>Who's on duty</button>
+      <button data-t="32.5"><span class="t">0:32</span>Plan the week</button>
+      <button data-t="49.5"><span class="t">0:49</span>Approve timesheets</button>
+      <button data-t="63.8"><span class="t">1:03</span>Payroll in minutes</button>
+      <button data-t="83.8"><span class="t">1:23</span>Clear payslips</button>
+      <button data-t="95.9"><span class="t">1:35</span>Ready to remit</button>
+      <button data-t="111.5"><span class="t">1:51</span>Start in an afternoon</button>
+      <button data-t="123"><span class="t">2:02</span>Free trial</button>
+    </nav>
+  </section>
+
+  <section aria-labelledby="what">
+    <p class="section-title" id="what">What it does</p>
+    <div class="features">
+      <div class="feature"><h3>Clock in three ways</h3><p>A shared tablet with employee PINs, a phone with an optional location check, or a manager entering a missed shift.</p></div>
+      <div class="feature"><h3>Know who's on duty</h3><p>A live board shows who is working, on break, late or absent, with alerts by email for lates, no-shows and forgotten clock-outs.</p></div>
+      <div class="feature"><h3>Plan the week</h3><p>A weekly schedule with days off and swaps. Lates and undertime follow the schedule, overnight shifts included.</p></div>
+      <div class="feature"><h3>Approve, then pay</h3><p>Review punches in bulk, approve overtime, and run payroll for the 1st–15th or 16th–end cutoff in minutes.</p></div>
+      <div class="feature"><h3>Payslips and reports</h3><p>Payslips staff open on their phone, the payroll register, a bank payout file and monthly remittance totals.</p></div>
+      <div class="feature"><h3>Start in an afternoon</h3><p>Paste your staff list from Excel or Google Sheets. A preview catches mistakes before anything is saved.</p></div>
+    </div>
+    <div class="rules" aria-label="Philippine payroll rules built in">
+      <span>Overtime</span><span>Night differential (10 PM–6 AM)</span><span>Regular &amp; special holidays</span><span>Rest-day premium</span><span>Late &amp; undertime</span><span>SSS</span><span>PhilHealth</span><span>Pag-IBIG</span><span>BIR withholding</span>
+    </div>
+  </section>
+
+  <section class="cta" aria-label="Try ShiftPay">
+    <div>
+      <h2>Try ShiftPay free for 7 days</h2>
+      <p>Create your company and add your team. No card needed.</p>
+    </div>
+    <a href="https://shiftpay-psi.vercel.app/signup" target="_blank" rel="noopener">Start your free trial</a>
+  </section>
+
+  <footer>Demo data shown. Payroll results should be reviewed by your accountant before you pay.</footer>
+</div>
+
+<script>
+  const video = document.getElementById("video");
+  const buttons = [...document.querySelectorAll(".chapters button")];
+  buttons.forEach((b) =>
+    b.addEventListener("click", () => {
+      video.currentTime = Number(b.dataset.t);
+      video.play().catch(() => {});
+    }),
+  );
+  video.addEventListener("timeupdate", () => {
+    let current = buttons[0];
+    for (const b of buttons) if (video.currentTime + 0.05 >= Number(b.dataset.t)) current = b;
+    buttons.forEach((b) => b.setAttribute("aria-current", String(b === current)));
+  });
+</script>
+
+</body>
+</html>
